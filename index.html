@@ -30,6 +30,13 @@
         .info-value {
             display: inline-block;
         }
+		.info-row input[type="time"] {
+			width: 75px;
+		}
+		.info-row input[type="date"] {
+			font-family: Arial, sans-serif;
+		}
+
     </style>
 </head>
 <body>
@@ -67,8 +74,7 @@
             const now = new Date();
             const hours = String(now.getHours()).padStart(2, '0');
             const minutes = String(now.getMinutes()).padStart(2, '0');
-            const seconds = String(now.getSeconds()).padStart(2, '0');
-            const currentTime = `${hours}:${minutes}:${seconds}`;
+            const currentTime = `${hours}:${minutes}`;
             document.getElementById('currentTime').innerText = currentTime;
         }
         setInterval(updateTime, 1000);
