@@ -8,7 +8,7 @@
         body {
             font-family: Arial, sans-serif;
             margin: 20px;
-			zoom: 270%;
+            zoom: 270%;
         }
         .container {
             max-width: 600px;
@@ -22,21 +22,20 @@
             width: 150px;
             font-weight: bold;
         }
-		.time-display {
-			font-weight: bold;
-			display: inline-block;
-			font-size: 100px;
-		}
+        .time-display {
+            font-weight: bold;
+            display: inline-block;
+            font-size: 100px;
+        }
         .info-value {
             display: inline-block;
         }
-		.info-row input[type="time"] {
-			width: 75px;
-		}
-		.info-row input[type="date"] {
-			font-family: Arial, sans-serif;
-		}
-
+        .info-row input[type="time"] {
+            width: 75px;
+        }
+        .info-row input[type="date"] {
+            font-family: Arial, sans-serif;
+        }
     </style>
 </head>
 <body>
@@ -57,9 +56,16 @@
             <div class="info-label">Date:</div>
             <div class="info-value"><input type="date" id="date" value="2024-06-06"></div>
         </div>
+		<div class="info-row">
+            <div class="info-label">Duration (minutes):</div>
+            <div class="info-value"><input type="number" id="duration" value="120"></div>
+        </div>
         <div class="info-row">
             <div class="info-label">Start:</div>
-            <div class="info-value"><input type="time" id="start"></div>
+            <div class="info-value">
+                <input type="time" id="start">
+                <button onclick="setStartEndTime()">Start Exam</button>
+            </div>
         </div>
         <div class="info-row">
             <div class="info-label">End:</div>
@@ -77,6 +83,21 @@
             const currentTime = `${hours}:${minutes}`;
             document.getElementById('currentTime').innerText = currentTime;
         }
+
+        function setStartEndTime() {
+            const now = new Date();
+            const duration = parseInt(document.getElementById('duration').value, 10);
+            const end = new Date(now.getTime() + duration * 60000);
+
+            const startHours = String(now.getHours()).padStart(2, '0');
+            const startMinutes = String(now.getMinutes()).padStart(2, '0');
+            document.getElementById('start').value = `${startHours}:${startMinutes}`;
+
+            const endHours = String(end.getHours()).padStart(2, '0');
+            const endMinutes = String(end.getMinutes()).padStart(2, '0');
+            document.getElementById('end').value = `${endHours}:${endMinutes}`;
+        }
+
         setInterval(updateTime, 1000);
         updateTime();
     </script>
